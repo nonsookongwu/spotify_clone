@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "876322683229",
+    "project_id": "spotify-app-chukwunonso",
+    "storage_bucket": "spotify-app-chukwunonso.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:876322683229:android:849b5bc3e98dfbeb9750b4",
+        "android_client_info": {
+          "package_name": "com.example.spotify_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdIwwHsroBxUhTPVmdG_mKG1tQj5ffg9g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

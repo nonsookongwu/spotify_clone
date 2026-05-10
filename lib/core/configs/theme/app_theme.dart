@@ -5,6 +5,12 @@ class AppTheme {
   static final lightTheme = ThemeData(
     primaryColor: AppColors.primaryColor,
     scaffoldBackgroundColor: AppColors.lightBackground,
+    snackBarTheme: SnackBarThemeData(backgroundColor: AppColors.lightDisablegrey),
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      color: AppColors.darkDisablegrey,
+      strokeWidth: 2,
+
+    ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: Colors.transparent,
@@ -89,6 +95,12 @@ class AppTheme {
   static final darkTheme = ThemeData(
     primaryColor: AppColors.primaryColor,
     scaffoldBackgroundColor: AppColors.darkBackground,
+    snackBarTheme: SnackBarThemeData(backgroundColor: AppColors.darkDisablegrey),
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      color: AppColors.darkDisablegrey,
+      strokeWidth: 2,
+      
+    ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: Colors.transparent,

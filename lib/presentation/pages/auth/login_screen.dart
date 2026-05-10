@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:dartz/dartz.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:spotify_app/core/configs/assets/app_vectors.dart';
+import 'package:spotify_app/data/models/auth/create_user_req.dart';
 import 'package:spotify_app/data/models/validator.dart';
+import 'package:spotify_app/domain/usecases/auth/sign_up.dart';
 import 'package:spotify_app/presentation/bloc/isLogin_cubit.dart';
 import 'package:spotify_app/presentation/bloc/theme_cubit.dart';
 import 'package:spotify_app/presentation/pages/auth/register_screen.dart';
+import 'package:spotify_app/presentation/pages/root/root_page.dart';
 import 'package:spotify_app/presentation/widget/custom_IconButton.dart';
 import 'package:spotify_app/presentation/widget/custom_appBar.dart';
 import 'package:spotify_app/presentation/widget/custom_button.dart';
 import 'package:spotify_app/presentation/widget/custom_text_button.dart';
+import 'package:spotify_app/service_locator.dart';
+import 'package:dartz/dartz.dart' hide State;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -23,10 +29,12 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool isPasswordHiddden = true;
   // bool isLogin = context.read<IsloginCubit>().updateIsLogin(isLogin);
+
   final _formKey = GlobalKey<FormState>();
   String _enteredEmail = "";
   String _enteredPassword = "";
   String _enteredFullName = "";
+  bool isloading = false;
 
   void _handleHidePassword() {
     setState(() {
@@ -41,15 +49,84 @@ class _LoginScreenState extends State<LoginScreen> {
     context.read<IsloginCubit>().updateIsLogin();
   }
 
-  void _handleFormSubmit() {
+  void _showSnackBar(String message) {
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        // content: Text(message, style: TextStyle(color: Colors.black)),
+        content: Text(message, style: Theme.of(context).textTheme.bodySmall),
+        duration: Duration(seconds: 5),
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
+  }
+
+  void _handleFormSubmit() async {
     final isValid = _formKey.currentState!.validate();
+    final isLogin = context.read<IsloginCubit>();
 
     if (isValid) {
       _formKey.currentState!.save();
+
+      if (isLogin.state) {
+        setState(() {
+          isloading = true;
+        });
+        final result = await sl<SignInUseCase>().executeFunction(
+          params: LoginUserReq(
+            email: _enteredEmail,
+            password: _enteredPassword,
+          ),
+        );
+        setState(() {
+          isloading = false;
+        });
+        result.fold(
+          (l) {
+            // print(l);
+            _showSnackBar(l);
+          },
+          (r) {
+            print(r);
+            _showSnackBar(r);
+            _formKey.currentState!.reset();
+            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=> RootPage()), (route) => false,);
+          },
+        );
+      } else {
+        setState(() {
+          isloading = true;
+        });
+        final result = await sl<SignUpUseCase>().executeFunction(
+          params: CreateUserReq(
+            email: _enteredEmail,
+            password: _enteredPassword,
+            fullname: _enteredFullName,
+          ),
+        );
+        setState(() {
+          isloading = false;
+        });
+        result.fold(
+          (l) {
+            // print(l);
+            _showSnackBar(l);
+          },
+          (r) {
+            // print(r);
+            _showSnackBar(r);
+            _formKey.currentState!.reset();
+            // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=> RootPage()), (route) => false,);
+            _handleAuthToggle();
+          },
+        );
+      }
     }
-    print(_enteredEmail);
-    print(_enteredFullName);
-    print(_enteredPassword);
+
+    // print(_enteredEmail);
+    // print(_enteredFullName);
+    // print(_enteredPassword);
+    // print(isLogin.state);
   }
 
   @override
@@ -174,6 +251,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     CustomButton(
                       onPressed: _handleFormSubmit,
                       title: state ? "Sign In" : "Create Account",
+                      isLoading: isloading,
                     ),
                     // SizedBox(height: 30),
                     Row(
