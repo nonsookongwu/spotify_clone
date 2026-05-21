@@ -11,4 +11,6 @@ class AppVectors {
   static const String rightDivider = "${basePath}right_divider$format";
   static const String googleIcon = "${basePath}google_icon$format";
   static const String appleIcon = "${basePath}apple_icon$format";
+  static const String searchIcon = "${basePath}search_icon$format";
+  static const String deisgnPattern = "${basePath}design_stripes$format";
 }

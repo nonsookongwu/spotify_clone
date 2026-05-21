@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spotify_app/data/models/auth/create_user_req.dart';
@@ -16,6 +17,20 @@ class AuthFirebaseImplementation extends AuthFirebaseService {
         email: user.email,
         password: user.password,
       );
+
+      // await FirebaseFirestore.instance
+      //       .collection("users")
+      //       .doc(userCredentials.user!.uid)
+      //       .set({
+      //         "fullname": user.fullname,
+      //         "email": user.email,
+      //         "username": user.email,
+      //       });
+      await FirebaseFirestore.instance.collection("users").add({
+                 "fullname": user.fullname,
+              "email": user.email,
+              "username": user.email,
+      });
 
       return const Right("Sign up is successful");
     } on FirebaseAuthException catch (e) {

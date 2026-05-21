@@ -9,7 +9,7 @@ import 'package:spotify_app/domain/usecases/auth/sign_up.dart';
 import 'package:spotify_app/presentation/bloc/isLogin_cubit.dart';
 import 'package:spotify_app/presentation/bloc/theme_cubit.dart';
 import 'package:spotify_app/presentation/pages/auth/register_screen.dart';
-import 'package:spotify_app/presentation/pages/root/root_page.dart';
+import 'package:spotify_app/presentation/pages/home/homePage.dart';
 import 'package:spotify_app/presentation/widget/custom_IconButton.dart';
 import 'package:spotify_app/presentation/widget/custom_appBar.dart';
 import 'package:spotify_app/presentation/widget/custom_button.dart';
@@ -87,10 +87,10 @@ class _LoginScreenState extends State<LoginScreen> {
             _showSnackBar(l);
           },
           (r) {
-            print(r);
+            // print(r);
             _showSnackBar(r);
             _formKey.currentState!.reset();
-            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=> RootPage()), (route) => false,);
+            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=> Homepage()), (route) => false,);
           },
         );
       } else {

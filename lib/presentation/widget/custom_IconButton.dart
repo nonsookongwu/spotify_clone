@@ -7,6 +7,8 @@ class CustomIconButton extends StatelessWidget {
     this.onPressed,
     this.height = 60,
     this.width = 60,
+    this.iconWidth = 30,
+    this.iconHeight = 30,
     required this.svgPath,
     // required this.bkGroundColor,
   });
@@ -15,13 +17,15 @@ class CustomIconButton extends StatelessWidget {
   final void Function()? onPressed;
   final double height;
   final double width;
+  final double iconWidth;
+  final double iconHeight;
   // final Color bkGroundColor;
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: onPressed,
-      icon: SvgPicture.asset(svgPath, width: 30, height: 30),
+      icon: SvgPicture.asset(svgPath, width: iconWidth, height: iconHeight),
       style: IconButton.styleFrom(
         // backgroundColor: bkGroundColor,
         // disabledBackgroundColor: bkGroundColor.withValues(alpha: 0.6),
