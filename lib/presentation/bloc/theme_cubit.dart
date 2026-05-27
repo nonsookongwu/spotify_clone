@@ -1,12 +1,13 @@
-
 import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 class ThemeCubit extends HydratedCubit<ThemeMode> {
-  ThemeCubit():super(ThemeMode.system);
+  ThemeCubit() : super(ThemeMode.system);
 
-void updateTheme (ThemeMode theme)=> emit(theme);
-  
+  void updateTheme(ThemeMode theme) => emit(theme);
+
+  void getCurrentTheme() => emit(state);
+
   // @override
   // ThemeMode? fromJson(Map<String, dynamic> json) {
   //   // TODO: implement fromJson
@@ -28,17 +29,15 @@ void updateTheme (ThemeMode theme)=> emit(theme);
   // //     orElse: () => ThemeMode.system,
   // //   );
   // // }
- @override
+  @override
   ThemeMode? fromJson(Map<String, dynamic> json) {
-  try {
-    final themeString = json['theme'] as String;
-    return ThemeMode.values.firstWhere(
-      (e) => e.name == themeString,
-    );
-  } catch (_) {
-    return ThemeMode.system;
+    try {
+      final themeString = json['theme'] as String;
+      return ThemeMode.values.firstWhere((e) => e.name == themeString);
+    } catch (_) {
+      return ThemeMode.system;
+    }
   }
-}
 
   @override
   Map<String, dynamic>? toJson(ThemeMode state) {
@@ -46,6 +45,4 @@ void updateTheme (ThemeMode theme)=> emit(theme);
       'theme': state.name, // store as string
     };
   }
-
-  
 }

@@ -7,6 +7,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:spotify_app/core/configs/theme/app_theme.dart';
 import 'package:spotify_app/firebase_options.dart';
 import 'package:spotify_app/presentation/bloc/isLogin_cubit.dart';
+import 'package:spotify_app/presentation/bloc/songs/new_songs_cubit.dart';
 import 'package:spotify_app/presentation/bloc/theme_cubit.dart';
 import 'package:spotify_app/presentation/pages/splashPage/splash.dart';
 import 'package:spotify_app/service_locator.dart';
@@ -18,7 +19,7 @@ Future<void> main() async {
         ? HydratedStorageDirectory.web
         : HydratedStorageDirectory((await getTemporaryDirectory()).path),
   );
-  await Firebase.initializeApp( options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await initializeDependencies();
   runApp(MyApp());
 }
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => ThemeCubit()),
         BlocProvider(create: (_) => IsloginCubit()),
+        // BlocProvider(create: (_) => NewSongsCubit()),
       ],
       child: BlocBuilder<ThemeCubit, ThemeMode>(
         builder: (context, mode) {

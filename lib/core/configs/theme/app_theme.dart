@@ -5,11 +5,21 @@ class AppTheme {
   static final lightTheme = ThemeData(
     primaryColor: AppColors.primaryColor,
     scaffoldBackgroundColor: AppColors.lightBackground,
-    snackBarTheme: SnackBarThemeData(backgroundColor: AppColors.lightDisablegrey),
+    snackBarTheme: SnackBarThemeData(
+      backgroundColor: AppColors.lightDisablegrey,
+    ),
     progressIndicatorTheme: ProgressIndicatorThemeData(
       color: AppColors.darkDisablegrey,
       strokeWidth: 2,
-
+    ),
+    tabBarTheme: TabBarThemeData(
+      labelColor: AppColors.tabBarLightSelectedColor,
+      unselectedLabelColor: AppColors.tabBarLightUnselectedColor,
+      labelStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      unselectedLabelStyle: TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.normal,
+      ),
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
@@ -47,7 +57,8 @@ class AppTheme {
       ),
       titleMedium: TextStyle(
         fontSize: 17,
-        color: AppColors.titleMediumLightColor,
+        // color: AppColors.titleMediumLightColor,
+        color: AppColors.titleLargeLightColor,
         fontWeight: FontWeight.normal,
       ),
       titleSmall: TextStyle(
@@ -95,11 +106,21 @@ class AppTheme {
   static final darkTheme = ThemeData(
     primaryColor: AppColors.primaryColor,
     scaffoldBackgroundColor: AppColors.darkBackground,
-    snackBarTheme: SnackBarThemeData(backgroundColor: AppColors.darkDisablegrey),
+    snackBarTheme: SnackBarThemeData(
+      backgroundColor: AppColors.darkDisablegrey,
+    ),
     progressIndicatorTheme: ProgressIndicatorThemeData(
       color: AppColors.darkDisablegrey,
       strokeWidth: 2,
-      
+    ),
+    tabBarTheme: TabBarThemeData(
+      labelColor: AppColors.tabBarDarkSelectedColor,
+      unselectedLabelColor: AppColors.tabBarDarkUnselectedColor,
+      labelStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      unselectedLabelStyle: TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.normal,
+      ),
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
@@ -137,7 +158,8 @@ class AppTheme {
       ),
       titleMedium: TextStyle(
         fontSize: 17,
-        color: AppColors.titleMediumDarkColor,
+        // color: AppColors.titleMediumDarkColor,
+        color: AppColors.titleLargeDarkColor,
         fontWeight: FontWeight.normal,
       ),
       labelMedium: TextStyle(

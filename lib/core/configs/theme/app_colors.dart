@@ -29,4 +29,10 @@ class AppColors {
   // textField colors
   static const textFieldBorderDarkColor = Color(0xffFFFFFF);
   static const textFieldBorderLightColor = Color(0xff000000);
+
+  //tab bar colors
+  static const tabBarLightSelectedColor = Color(0xff000000);
+  static const tabBarLightUnselectedColor = Color(0xffBEBEBE);
+  static const tabBarDarkSelectedColor = Color(0xffDBDBDB);
+  static const tabBarDarkUnselectedColor = Color(0xff616161);
 }

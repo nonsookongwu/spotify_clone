@@ -13,4 +13,6 @@ class AppVectors {
   static const String appleIcon = "${basePath}apple_icon$format";
   static const String searchIcon = "${basePath}search_icon$format";
   static const String deisgnPattern = "${basePath}design_stripes$format";
+  static const String playIcon = "${basePath}Play$format";
+  static const String playIconLight = "${basePath}Play_light$format";
 }
